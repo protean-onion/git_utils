@@ -13,15 +13,17 @@ def list_sha():
             sha.append(directory + listdir(objects + "/" + directory)[0])
     return sha
     
-def retreive_contents(sha_list):
-    contents = []
-    for sha in sha_list:
-        object_content = str(run(["git", "cat-file", "-p", sha]))
-        contents.append(object_content)
-    return contents
+def retreive_content(sha):
+    object_content = str(run(["git", "cat-file", "-p", sha]))
+    return object_content
 
 def main():
-    retreive_contents(list_sha())
+    sha_list = list_sha()
+    line = "--------------------"
+    for sha in sha_list:
+        print("SHA " + sha + ":\n")
+        print(retreive_content(sha))
+        print(line)
 
 if __name__ == "__main__":
     sys.exit(main())
