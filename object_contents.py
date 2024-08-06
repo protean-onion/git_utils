@@ -6,12 +6,12 @@ from os import listdir
 import sys
 
 def list_sha():
-    sha = []
+    sha_list = []
     objects = ".git/objects"
     for directory in listdir(objects):
         if len(str(directory)) <= 2:
             sha.append(directory + listdir(objects + "/" + directory)[0])
-    return sha
+    return sha_list
     
 def retreive_content(sha):
     object_content = str(run(["git", "cat-file", "-p", sha]))
