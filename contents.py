@@ -34,7 +34,7 @@ def main():
         ornate_content = line + "SHA " + sha + ":\n" + content_dict[sha]
         contents += ornate_content
 
-    sys.stdout.write(content)
+    sys.stdout.write(contents)
 
 if __name__ == "__main__":
     sys.exit(main())
