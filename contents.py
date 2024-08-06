@@ -28,7 +28,7 @@ def dict_content():
 def main():
     content_dict = dict_content()
     line = "\n--------------------------------\n"
-    content = ""
+    contents = ""
     
     for sha in content_dict.keys():
         ornate_content = line + "SHA " + sha + ":\n" + content_dict[sha]
