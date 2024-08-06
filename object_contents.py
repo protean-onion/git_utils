@@ -14,21 +14,22 @@ def list_sha():
     return sha_list
     
 def retreive_content(sha):
-    object_content = str(run(["git", "cat-file", "-p", sha]))[:-1] # omit process completion information
+    object_content = run(f"git cat-file -p {sha}", shell=True, capture_output=True).stdout.decode("unicode_escape")
     return object_content
 
-def list_content():
-    content_list = []
+def dict_content():
+    content_dict = {}
     for sha in list_sha():
-        content_list.append(retreive_content(sha))
-    return content_list
+        content_dict[sha] = retreive_content(sha)
+    return content_dict
 
 def main():
-    sha_list = list_sha()
-    line = "\n--------------------\n\n"
+    content_dict = dict_content()
+    line = "\n--------------------------------\n"
     
-    for sha in sha_list:
-        return_content = "SHA " + sha + ":\n" + retreive_content(sha) + line
+    for sha in content_dict.keys():
+        return_content = line + "SHA " + sha + ":\n" + content_dict[sha]
+        print(return_content)
 
 if __name__ == "__main__":
     sys.exit(main())
