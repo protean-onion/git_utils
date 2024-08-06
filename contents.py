@@ -1,6 +1,8 @@
 #!/usr/bin/python3
 # coding: utf-8
 
+# List the contents of object files in the `objects` directory.
+
 from subprocess import run
 from os import listdir
 import sys
