@@ -31,8 +31,8 @@ def main():
     content = ""
     
     for sha in content_dict.keys():
-        return_content = line + "SHA " + sha + ":\n" + content_dict[sha]
-        content += return_content
+        ornate_content = line + "SHA " + sha + ":\n" + content_dict[sha]
+        contents += ornate_content
 
     sys.stdout.write(content)
 
