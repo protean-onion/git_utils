@@ -26,10 +26,13 @@ def dict_content():
 def main():
     content_dict = dict_content()
     line = "\n--------------------------------\n"
+    content = ""
     
     for sha in content_dict.keys():
         return_content = line + "SHA " + sha + ":\n" + content_dict[sha]
-        print(return_content)
+        content += return_content
+
+    sys.stdout.write(content)
 
 if __name__ == "__main__":
     sys.exit(main())

@@ -1,0 +1,493 @@
+
+--------------------------------
+SHA 1c0c278f12679e231c9415e5b6b330fb5864c3e4:
+100755 blob ec43bab1b6ea684a3b128f564180c2f2c3a06e88	object_contents.py
+
+--------------------------------
+SHA 236f1b02a8ba4897d62d4097d8812db63cf97503:
+100755 blob cebf66043ac0048ee791250830e61a0d175b1d04	object_contents.py
+
+--------------------------------
+SHA 1920220d417224df5669870ba2dcb2d90bdc8b93:
+tree 236f1b02a8ba4897d62d4097d8812db63cf97503
+parent b1d25eb4dcd4c1df73b46f5d5f3cc81faac6577f
+author Aditya <protean.onion@gmail.com> 1722948941 +0530
+committer Aditya <protean.onion@gmail.com> 1722948941 +0530
+
+detached HEAD ugh... need to learn this. for now, though, i' just switch to master and copy the function.
+
+--------------------------------
+SHA ec43bab1b6ea684a3b128f564180c2f2c3a06e88:
+#!/usr/bin/python3
+# coding: utf-8
+
+from subprocess import run
+from os import listdir
+import sys
+
+def list_sha():
+    sha_list = []
+    objects = ".git/objects"
+    for directory in listdir(objects):
+        if len(str(directory)) <= 2:
+            sha.append(directory + listdir(objects + "/" + directory)[0])
+    return sha_list
+    
+def retreive_content(sha):
+    object_content = str(run(["git", "cat-file", "-p", sha]))
+    return object_content
+
+def main():
+    sha_list = list_sha()
+    line = "--------------------"
+    for sha in sha_list:
+        print("SHA " + sha + ":
+")
+        print(retreive_content(sha))
+        print(line)
+
+if __name__ == "__main__":
+    sys.exit(main())
+
+--------------------------------
+SHA e69de29bb2d1d6434b8b29ae775ad8c2e48c5391:
+
+--------------------------------
+SHA 629924fcafe4d56fe20585f6b77096ec7b19b96e:
+100755 blob afece9a2d0a8c6690576dadca1aa8bf58697e91c	object_contents.py
+
+--------------------------------
+SHA 804d0f6a2cf9008db3bdff6dfaa3c3c66574219f:
+#!/usr/bin/python3
+# coding: utf-8
+
+from subprocess import run
+from os import listdir
+import sys
+
+def list_sha():
+    sha = []
+    objects = ".git/objects"
+    for directory in listdir(objects):
+        if len(str(directory)) <= 2:
+            sha.append(directory + listdir(objects + "/" + directory)[0])
+    return sha
+    
+def retreive_contents(sha_list):
+    contents = []
+    for sha in sha_list:
+        object_content = str(run(["git", "cat-file", "-p", sha]))
+        contents.append(object_content)
+    return contents
+
+def main():
+    retreive_contents(list_sha())
+
+if __name__ == "__main__":
+    sys.exit(main())
+
+--------------------------------
+SHA 524b0a9cbe0c88a28410c10931943560ff25f36a:
+tree 723a380a75b0edef9632e840b11d845f7330fc42
+parent 5452744c96b1a6dd42bd3eb6213854065f2bec6d
+author Aditya <protean.onion@gmail.com> 1722948108 +0530
+committer Aditya <protean.onion@gmail.com> 1722948108 +0530
+
+The iteration works. Some intricacy of  was preventing it.
+
+--------------------------------
+SHA b1d25eb4dcd4c1df73b46f5d5f3cc81faac6577f:
+tree 9d2dd057e5d3740296c8d03b9d98471ddbea0a6c
+parent 524b0a9cbe0c88a28410c10931943560ff25f36a
+author Aditya <protean.onion@gmail.com> 1722948637 +0530
+committer Aditya <protean.onion@gmail.com> 1722948637 +0530
+
+Fixed `subprocess`
+
+--------------------------------
+SHA 721377e4caf3f232007c90963b5b95bd79528de6:
+tree 1c0c278f12679e231c9415e5b6b330fb5864c3e4
+parent b2ffbd33764f3d281e96c73187635290eae66d8e
+author Aditya <protean.onion@gmail.com> 1722936058 +0530
+committer Aditya <protean.onion@gmail.com> 1722936058 +0530
+
+Changed  to  in
+
+--------------------------------
+SHA e53514bde0c49373f963d46c571fc8de7939790a:
+tree a468e05adc48af9ec422b61a7fb9b759a108d2cc
+author Aditya <protean.onion@gmail.com> 1722935764 +0530
+committer Aditya <protean.onion@gmail.com> 1722935764 +0530
+
+Base
+
+--------------------------------
+SHA cebf66043ac0048ee791250830e61a0d175b1d04:
+#!/usr/bin/python3
+# coding: utf-8
+
+from subprocess import run
+from os import listdir
+import sys
+
+def list_sha():
+    sha_list = []
+    objects = ".git/objects"
+    for directory in listdir(objects):
+        if len(str(directory)) <= 2:
+            sha_list.append(directory + listdir(objects + "/" + directory)[0])
+    return sha_list
+    
+def retreive_content(sha):
+    object_content = run(f"git cat-file -p {sha}", shell=True, capture_output=True).stdout.decode("unicode_escape")
+    return object_content
+
+def list_content():
+    content_list = []
+    for sha in list_sha():
+        content_list.append(retreive_content(sha))
+    return content_list
+
+def main():
+    sha_list = list_sha()
+    line = "
+--------------------
+
+"
+    
+    for sha in sha_list:
+        return_content = "SHA " + sha + ":
+" + retreive_content(sha) + line
+
+if __name__ == "__main__":
+    sys.exit(main())
+
+--------------------------------
+SHA 268a723ccf535a9534b19d10e81ff7056cac6425:
+#!/usr/bin/python3
+# coding: utf-8
+
+from subprocess import run, Popen
+from os import listdir
+import sys
+
+def list_sha():
+    sha_list = []
+    objects = ".git/objects"
+    for directory in listdir(objects):
+        if len(str(directory)) <= 2:
+            sha_list.append(directory + listdir(objects + "/" + directory)[0])
+    return sha_list
+    
+def retreive_content(sha):
+    object_content = run(f"git cat-file -p {sha}", shell=True, capture_output=True).stdout.decode("unicode_escape")
+    return object_content
+
+def dict_content():
+    sha_list = list_sha()
+    content_dict = {}
+    for sha in sha_list:
+        content_dict[sha] = retreive_content(sha)
+    return content_dict
+
+def generate_contents():
+    line = "-------------------------
+"
+    content_dict = dict_content()
+    contents = ""
+    for sha in content_dict.keys():
+        ornate_content = line + "SHA: " + sha + "
+" + content_dict[sha] + "
+
+"
+        contents += ornate_content
+    return contents
+
+def main():
+    contents = str(generate_contents())
+    # print(contents)
+#    return contents
+
+if __name__ == "__main__":
+    sys.exit(main())
+
+--------------------------------
+SHA 7771a2c243c941a7f681b544d2946cc4aec1255a:
+#!/usr/bin/python3
+# coding: utf-8
+
+from subprocess import run
+from os import listdir
+import sys
+
+def list_sha():
+    sha_list = []
+    objects = ".git/objects"
+    for directory in listdir(objects):
+        if len(str(directory)) <= 2:
+            sha_list.append(directory + listdir(objects + "/" + directory)[0])
+    return sha_list
+    
+def retreive_content(sha):
+    object_content = run(f"git cat-file -p {sha}", shell=True, capture_output=True).stdout.decode("unicode_escape")
+    return object_content
+def list_content():
+    content_list = []
+    for sha in list_sha():
+        content_list.append(retreive_content(sha))
+    return content_list
+
+def main():
+    sha_list = list_sha()
+    line = "
+--------------------
+
+"
+    
+    for sha in sha_list:
+        return_content = "SHA " + sha + ":
+" + retreive_content(sha) + line
+
+if __name__ == "__main__":
+    sys.exit(main())
+
+--------------------------------
+SHA afece9a2d0a8c6690576dadca1aa8bf58697e91c:
+#!/usr/bin/python3
+# coding: utf-8
+
+from subprocess import run
+from os import listdir
+import sys
+
+def list_sha():
+    sha = []
+    objects = ".git/objects"
+    for directory in listdir(objects):
+        if len(str(directory)) <= 2:
+            sha.append(directory + listdir(objects + "/" + directory)[0])
+    return sha
+    
+def retreive_content(sha):
+    object_content = str(run(["git", "cat-file", "-p", sha]))
+    return object_content
+
+def main():
+    sha_list = list_sha()
+    line = "--------------------"
+    for sha in sha_list:
+        print("SHA " + sha + ":
+")
+        print(retreive_content(sha))
+        print(line)
+
+if __name__ == "__main__":
+    sys.exit(main())
+
+--------------------------------
+SHA 6785cc47b063ae480482a438a9156d3c831ba3bc:
+100755 blob a07b1915a721679fe683ad669d69b5a5cc09476f	object_contents.py
+
+--------------------------------
+SHA 998b19dc57a05bcb154ac410793cb812baaf7394:
+#!/usr/bin/python3
+# coding: utf-8
+
+from subprocess import run
+from os import listdir
+import sys
+
+def list_sha():
+    sha_list = []
+    objects = ".git/objects"
+    for directory in listdir(objects):
+        if len(str(directory)) <= 2:
+            sha_list.append(directory + listdir(objects + "/" + directory)[0])
+    return sha_list
+    
+def retreive_content(sha):
+    object_content = str(run(["git", "cat-file", "-p", sha]))[:-1] # omit process completion information
+    return object_content
+
+def list_content():
+    content_list = []
+    for sha in list_sha():
+        content_list.append(retreive_content(sha))
+    return content_list
+
+def main():
+    sha_list = list_sha()
+    line = "
+--------------------
+
+"
+    
+    for sha in sha_list:
+        return_content = "SHA " + sha + ":
+" + retreive_content(sha) + line
+
+if __name__ == "__main__":
+    sys.exit(main())
+
+--------------------------------
+SHA 9d2dd057e5d3740296c8d03b9d98471ddbea0a6c:
+100755 blob 7771a2c243c941a7f681b544d2946cc4aec1255a	object_contents.py
+
+--------------------------------
+SHA 157f6b67696de37e99915467d90884840fb94269:
+100644 blob e69de29bb2d1d6434b8b29ae775ad8c2e48c5391	__init__.py
+100755 blob 268a723ccf535a9534b19d10e81ff7056cac6425	object_contents.py
+
+--------------------------------
+SHA cc0d54776cc112656bfe13e8b70428003c3c94dc:
+100755 blob 751348d747f161fe4fca4fc181f7320c93d623e3	object_contents.py
+
+--------------------------------
+SHA b2ffbd33764f3d281e96c73187635290eae66d8e:
+tree 629924fcafe4d56fe20585f6b77096ec7b19b96e
+parent e53514bde0c49373f963d46c571fc8de7939790a
+author Aditya <protean.onion@gmail.com> 1722935931 +0530
+committer Aditya <protean.onion@gmail.com> 1722935931 +0530
+
+Let's see if this works
+
+--------------------------------
+SHA 85ab95f7ea9780d2cc591a3c21530deb40342eec:
+#!/usr/bin/python3
+# coding: utf-8
+
+from subprocess import run
+from os import listdir
+import sys
+
+def list_sha():
+    sha_list = []
+    objects = ".git/objects"
+    for directory in listdir(objects):
+        if len(str(directory)) <= 2:
+            sha_list.append(directory + listdir(objects + "/" + directory)[0])
+    return sha_list
+    
+def retreive_content(sha):
+    object_content = str(run(["git", "cat-file", "-p", sha]))[:-1] # omit process completion information
+    return object_content
+
+
+
+def main():
+    sha_list = list_sha()
+    line = "
+--------------------
+
+"
+    for sha in sha_list:
+        return_content = "SHA " + sha + ":
+" + retreive_content(sha) + line
+
+if __name__ == "__main__":
+    sys.exit(main())
+
+--------------------------------
+SHA a07b1915a721679fe683ad669d69b5a5cc09476f:
+#!/usr/bin/python3
+# coding: utf-8
+
+from subprocess import run
+from os import listdir
+import sys
+
+def list_sha():
+    sha_list = []
+    objects = ".git/objects"
+    for directory in listdir(objects):
+        if len(str(directory)) <= 2:
+            sha_list.append(directory + listdir(objects + "/" + directory)[0])
+    return sha_list
+    
+def retreive_content(sha):
+    object_content = run(f"git cat-file -p {sha}", shell=True, capture_output=True).stdout.decode("unicode_escape")
+    return object_content
+
+def dict_content():
+    content_dict = {}
+    for sha in list_sha():
+        content_dict[sha] = retreive_content(sha)
+    return content_dict
+
+def main():
+    content_dict = dict_content()
+    line = "
+--------------------------------
+"
+    
+    for sha in content_dict.keys():
+        return_content = line + "SHA " + sha + ":
+" + content_dict[sha]
+        print(return_content)
+
+if __name__ == "__main__":
+    sys.exit(main())
+
+--------------------------------
+SHA 5452744c96b1a6dd42bd3eb6213854065f2bec6d:
+tree cc0d54776cc112656bfe13e8b70428003c3c94dc
+parent 721377e4caf3f232007c90963b5b95bd79528de6
+author Aditya <protean.onion@gmail.com> 1722936139 +0530
+committer Aditya <protean.onion@gmail.com> 1722936139 +0530
+
+Changed bad commit
+
+--------------------------------
+SHA a468e05adc48af9ec422b61a7fb9b759a108d2cc:
+100755 blob 804d0f6a2cf9008db3bdff6dfaa3c3c66574219f	object_contents.py
+
+--------------------------------
+SHA 58763e1657d0bb4a6fdc72635055c2b1f3a022c9:
+tree 157f6b67696de37e99915467d90884840fb94269
+parent 524b0a9cbe0c88a28410c10931943560ff25f36a
+author Aditya <protean.onion@gmail.com> 1722948275 +0530
+committer Aditya <protean.onion@gmail.com> 1722948275 +0530
+
+fixed-subprocess
+
+--------------------------------
+SHA 8b8b5123b1d7bd8843a661689e41e625dd5ea95d:
+tree 6785cc47b063ae480482a438a9156d3c831ba3bc
+parent 524b0a9cbe0c88a28410c10931943560ff25f36a
+author Aditya <protean.onion@gmail.com> 1722949261 +0530
+committer Aditya <protean.onion@gmail.com> 1722949261 +0530
+
+hopefully it works now
+
+--------------------------------
+SHA 751348d747f161fe4fca4fc181f7320c93d623e3:
+#!/usr/bin/python3
+# coding: utf-8
+
+from subprocess import run
+from os import listdir
+import sys
+
+def list_sha():
+    sha_list = []
+    objects = ".git/objects"
+    for directory in listdir(objects):
+        if len(str(directory)) <= 2:
+            sha_list.append(directory + listdir(objects + "/" + directory)[0])
+    return sha_list
+    
+def retreive_content(sha):
+    object_content = str(run(["git", "cat-file", "-p", sha]))
+    return object_content
+
+def main():
+    sha_list = list_sha()
+    line = "--------------------"
+    for sha in sha_list:
+        print("SHA " + sha + ":
+")
+        print(retreive_content(sha))
+        print(line)
+
+if __name__ == "__main__":
+    sys.exit(main())
