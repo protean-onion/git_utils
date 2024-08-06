@@ -14,16 +14,21 @@ def list_sha():
     return sha_list
     
 def retreive_content(sha):
-    object_content = str(run(["git", "cat-file", "-p", sha]))
+    object_content = str(run(["git", "cat-file", "-p", sha]))[:-1] # omit process completion information
     return object_content
+
+def list_content():
+    content_list = []
+    for sha in list_sha():
+        content_list.append(retreive_content(sha))
+    return content_list
 
 def main():
     sha_list = list_sha()
-    line = "--------------------"
+    line = "\n--------------------\n\n"
+    
     for sha in sha_list:
-        print("SHA " + sha + ":\n")
-        print(retreive_content(sha))
-        print(line)
+        return_content = "SHA " + sha + ":\n" + retreive_content(sha) + line
 
 if __name__ == "__main__":
     sys.exit(main())
