@@ -10,7 +10,7 @@ def list_sha():
     objects = ".git/objects"
     for directory in listdir(objects):
         if len(str(directory)) <= 2:
-            sha.append(directory + listdir(objects + "/" + directory)[0])
+            sha_list.append(directory + listdir(objects + "/" + directory)[0])
     return sha_list
     
 def retreive_content(sha):
